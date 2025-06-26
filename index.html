@@ -1,143 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>DApp Launcher - TiffyAI</title>
+  <meta charset="UTF-8" />
+  <title>TiffyAI Wallet Connect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module">
+    import { Web3Modal } from '@web3modal/html'
+    import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+    import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+    import { bsc } from 'wagmi/chains'
+
+    const projectId = 'bf40c7dcdb05f06f2769573103007576' // Replace with your WalletConnect Project ID
+
+    const chains = [bsc]
+    const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+    const wagmiConfig = createConfig({
+      autoConnect: true,
+      connectors: w3mConnectors({ projectId, version: 2, chains }),
+      publicClient
+    })
+
+    const ethereumClient = new EthereumClient(wagmiConfig, chains)
+
+    const modal = new Web3Modal({
+      projectId,
+      themeMode: 'dark',
+      themeVariables: {
+        '--w3m-accent': '#00ffc3',
+        '--w3m-background': '#000015',
+        '--w3m-logo-image-url': 'https://tiffyai.github.io/Blue-Key-Claim/TiffyAI-Token.png'
+      }
+    }, ethereumClient)
+
+    window.openTiffyModal = () => modal.openModal()
+  </script>
+
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #000015;
-      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #000015, #001F3F);
       color: white;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-    }
-
-    .container {
-      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     h1 {
       font-size: 26px;
       color: #00f0ff;
       text-shadow: 0 0 10px #00f0ff;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    input {
-      width: 90%;
-      max-width: 400px;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      background: #111;
-      color: #fff;
-      box-shadow: 0 0 10px #00ffff;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 12px 30px;
-      font-size: 16px;
+    .connect-btn {
       background: linear-gradient(90deg, #00ffc3, #9055ff);
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
+      padding: 16px 32px;
+      font-size: 18px;
+      font-weight: bold;
       color: white;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ffc3;
+      box-shadow: 0 0 20px #00ffc3;
+      transition: all 0.3s ease;
+      animation: glow 2s infinite alternate;
     }
 
-    .wallets {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+    @keyframes glow {
+      from { box-shadow: 0 0 12px #00ffc3; }
+      to { box-shadow: 0 0 28px #9055ff; }
     }
 
-    .wallet {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 15px;
-      border-radius: 12px;
-      width: 100px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 0 10px #444;
-      transition: 0.3s;
-    }
-
-    .wallet:hover {
-      box-shadow: 0 0 15px #00ffc3;
-    }
-
-    .wallet img {
-      width: 48px;
-      height: 48px;
-    }
-
-    .wallet span {
-      display: block;
-      margin-top: 8px;
-      font-size: 14px;
+    .connect-btn:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🚀 TiffyAI DApp Launcher</h1>
-    <input id="dappLink" type="text" value="https://tiffyai.github.io/Shield/" readonly />
-    <br/>
-    <button onclick="copyLink()">📋 Copy Link</button>
-
-    <div class="wallets">
-      <div class="wallet" onclick="openWallet('trust')">
-        <img src="https://trustwallet.com/assets/images/media-kit/icon.png" alt="Trust Wallet">
-        <span>Trust</span>
-      </div>
-      <div class="wallet" onclick="openWallet('metamask')">
-        <img src="https://raw.githubusercontent.com/MetaMask/brand-resources/master/SVG/metamask-fox.svg" alt="MetaMask">
-        <span>MetaMask</span>
-      </div>
-      <div class="wallet" onclick="openWallet('safepal')">
-        <img src="https://safepal.io/images/icon-72.png" alt="SafePal">
-        <span>SafePal</span>
-      </div>
-      <div class="wallet" onclick="openWallet('tokenpocket')">
-        <img src="https://play-lh.googleusercontent.com/FoxLZUrRv8wtelv3gmj6_o_ZZC3qqSyKfaWETxXLjzGoHlLGdSKS3sTMTG9MZdYrCkg=w240-h480-rw" alt="TokenPocket">
-        <span>TP Wallet</span>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function copyLink() {
-      const linkInput = document.getElementById('dappLink');
-      linkInput.select();
-      linkInput.setSelectionRange(0, 99999); // For mobile
-      document.execCommand("copy");
-      alert("✅ Link copied! Paste in your wallet DApp browser.");
-    }
-
-    function openWallet(wallet) {
-      switch(wallet) {
-        case 'trust':
-          window.open('https://trustwallet.com/browser-extension', '_blank');
-          break;
-        case 'metamask':
-          window.open('https://metamask.io/download', '_blank');
-          break;
-        case 'safepal':
-          window.open('https://safepal.io/download', '_blank');
-          break;
-        case 'tokenpocket':
-          window.open('https://www.tokenpocket.pro/en/download', '_blank');
-          break;
-        default:
-          alert('Wallet link not available.');
-      }
-    }
-  </script>
+  <h1>Connect to TiffyAI</h1>
+  <button class="connect-btn" onclick="openTiffyModal()">🔗 Connect Wallet</button>
 </body>
 </html>
