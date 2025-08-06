@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Open Wallet for TiffyAI</title>
+  <title>Connect to TiffyAI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
@@ -81,16 +81,15 @@
   <button class="wallet-btn" onclick="openWallet('metamask')">MetaMask</button>
   <button class="wallet-btn" onclick="openWallet('trust')">Trust Wallet</button>
   <button class="wallet-btn" onclick="openWallet('okx')">OKX Wallet</button>
-  <button class="wallet-btn" onclick="openWallet('tokenpocket')">TokenPocket</button>
-  <button class="wallet-btn" onclick="openWallet('safepal')">SafePal</button>
+  
 
   <div class="copy-section">
-    <div class="copy-text" id="shieldLink">https://tiffyai.github.io/Shield/</div>
-    <button class="copy-btn" onclick="copyShield()">📋 Copy Shield Link</button>
+    <div class="copy-text" id="shieldLink">https://tiffyai.github.io/Start/</div>
+    <button class="copy-btn" onclick="copyShield()">📋 Copy Start Link</button>
   </div>
 
   <footer>
-    Paste the Shield link inside your wallet browser once it opens.
+    Paste the Start link inside your wallet browser once it opens.
   </footer>
 
   <script>
@@ -99,8 +98,7 @@
         metamask: 'https://metamask.app.link/dapp/tiffyai.github.io/Shield/',
         trust: 'https://link.trustwallet.com/open_url?coin_id=20000714&url=https://tiffyai.github.io/Shield/',
         okx: 'okx://wallet/dapp/details?url=https%3A%2F%2Ftiffyai.github.io%2FShield%2F',
-        tokenpocket: 'tpoutside://open?url=https://tiffyai.github.io/Shield/',
-        safepal: 'https://www.safepal.com/spsdk/dapp/open?url=https://tiffyai.github.io/Shield/'
+        
       };
 
       const link = linkMap[wallet];
