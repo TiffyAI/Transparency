@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Connect to TiffyAI</title>
+  <title>Scarce-TiffyAI-Presale</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
@@ -76,7 +76,7 @@
   </style>
 </head>
 <body>
-  <h1>🔗 Open Your Wallet</h1>
+  <h1>TiffyAI Presale</h1>
 
   <button class="wallet-btn" onclick="openWallet('metamask')">MetaMask</button>
   <button class="wallet-btn" onclick="openWallet('trust')">Trust Wallet</button>
@@ -84,20 +84,20 @@
   
 
   <div class="copy-section">
-    <div class="copy-text" id="shieldLink">https://tiffyai.github.io/Start/</div>
-    <button class="copy-btn" onclick="copyShield()">📋 Copy Start Link</button>
+    <div class="copy-text" id="shieldLink">https://tiffyai.github.io/TiffyAI-Presale/</div>
+    <button class="copy-btn" onclick="copyShield()">📋 Copy Presale Link</button>
   </div>
 
   <footer>
-    Paste the Start link inside your wallet browser once it opens.
+    Paste the Presale link inside your wallet browser once it opens. Copy it just incase theres a network lag. 
   </footer>
 
   <script>
     function openWallet(wallet) {
       const linkMap = {
         metamask: 'https://metamask.app.link/dapp/tiffyai.github.io/Shield/',
-        trust: 'https://link.trustwallet.com/open_url?coin_id=20000714&url=https://tiffyai.github.io/Shield/',
-        okx: 'okx://wallet/dapp/details?url=https%3A%2F%2Ftiffyai.github.io%2FShield%2F',
+        trust: 'https://link.trustwallet.com/open_url?coin_id=20000714&url=https://tiffyai.github.io/TiffyAI-Presale/',
+        okx: 'okx://wallet/dapp/details?url=https%3A%2F%2Ftiffyai.github.io%2FTiffyAI-Presale%2F',
         
       };
 
@@ -112,7 +112,7 @@
     function copyShield() {
       const text = document.getElementById("shieldLink").innerText;
       navigator.clipboard.writeText(text).then(() => {
-        alert("✅ Shield link copied. Now paste it in your wallet's browser.");
+        alert("✅ Presale link copied. Now paste it in your wallet's browser.");
       });
     }
   </script>
